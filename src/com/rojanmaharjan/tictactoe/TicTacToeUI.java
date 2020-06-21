@@ -1,7 +1,10 @@
-package com.rojanmaharjan.snake;
+package com.rojanmaharjan.tictactoe;
 
-public class SnakeUI {
+import java.util.ArrayList;
+
+public class TicTacToeUI {
 	private String [][] matrix=  {{" "," "," "},{" "," "," "},{" "," "," "}};
+	private ArrayList <Integer> spotsTaken = new ArrayList<>();
 
 	public String[][] getMatrix() {
 		return matrix;
@@ -18,12 +21,13 @@ public class SnakeUI {
 		return matrixUI;
 	}
 	
-	public void setMatrix(String[][] matrix) {
-		this.matrix = matrix;
-	}
 	
-	public void placeTic(int position, String player) {
-		switch (position) {
+	public boolean placeTic(int position, String player) {
+		
+		if (spotsTaken.contains(position)) {
+			return false;
+		} else {
+			switch (position) {
 			case 1:
 				this.matrix[0][0] = player;
 				break;
@@ -54,6 +58,18 @@ public class SnakeUI {
 			default:
 				break;
 		}
+			spotsTaken.add(position);
+			return true;
+		}
+
 	}
-	
+
+	public void printBoard(String [][] board) {
+		for (String[] elementRow: board) {
+			for (String element: elementRow) {
+				System.out.print(element);
+			}
+			System.out.println();				
+		}
+	}
 }
